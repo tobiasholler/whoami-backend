@@ -3,8 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\VaidGameIdRule;
+use App\Rules\VaidPlayerIdRule;
 
-class JoinGameApiRequest extends FormRequest {
+class ShowGameApiRequest extends FormRequest {
 	/**
 	 * Determine if the user is authorized to make this request.
 	 *
@@ -21,10 +23,7 @@ class JoinGameApiRequest extends FormRequest {
 	 */
 	public function rules() {
 		return [
-			"name" => "min:1|max:64",
-			"character" => "min:1|max:64",
-			"description" => "nullable|max:255",
-			"link" => "nullable|max:255",
+			"player_id" => new ValidPlayerIdRule()
 		];
 	}
 }

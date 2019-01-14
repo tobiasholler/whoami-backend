@@ -13,9 +13,9 @@ class CreatePlayersTable extends Migration {
 	public function up() {
 		Schema::create('players', function (Blueprint $table) {
 			$table->increments('id');
-			$table->integer("game_id");
+			$table->string("game_id");
 			$table->string("name");
-			$table->string("word");
+			$table->string("character");
 			$table->string("description");
 			$table->string("link");
 			$table->timestamps();

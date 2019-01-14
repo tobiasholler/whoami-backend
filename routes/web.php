@@ -11,5 +11,8 @@
 |
 */
 
-Route::post("/api/new", "ApiController@newGame");
-Route::post("/api/join/{game_id}", "ApiController@joinGame");
+Route::post("/api/newgame", "ApiController@newGame");
+Route::post("/api/joingame/{game_id}", "ApiController@joinGame");
+Route::get("/api/showgame/{game_id}", "ApiController@showGame");
+Route::update("/api/updatecharacter", "ApiController@updateCharacter");
+Route::delete("/api/leavegame", "ApiController@leaveGame");
