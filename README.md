@@ -1,6 +1,6 @@
 # Who Am I? Backend
 
-## IN DEVELOPMENT
+**Version: 0.1-INDEV**
 
 This is the backend to the [Who Am I? App](/tobiasholler/whoami-app)
 
@@ -19,6 +19,7 @@ php artisan migrate
 ```
 
 ## API-Docs
+**This API-Docs is not right yet. Please check the PHP software tests for examples.**
 
 ### New Game
 

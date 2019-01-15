@@ -5,7 +5,7 @@ namespace App\Rules;
 use App\Game;
 use Illuminate\Contracts\Validation\Rule;
 
-class VaidGameIdRule implements Rule {
+class ValidGameIdRule implements Rule {
 	/**
 	 * Create a new rule instance.
 	 *

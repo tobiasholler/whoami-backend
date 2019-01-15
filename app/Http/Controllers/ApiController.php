@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Game;
 use App\Http\Requests\JoinGameApiRequest;
+use App\Http\Requests\LeaveGameRequest;
+use App\Http\Requests\ShowGameApiRequest;
 use App\Http\Requests\UpdateCharacterApiRequest;
 use App\Player;
 
@@ -31,14 +33,14 @@ class ApiController extends Controller {
 	}
 
 	public function joinGame(JoinGameApiRequest $request) {
-		if (Game::find($request->game_id) == null) return response()->json(["error_message" => trans("error_messages.gameid_not_found")], 404);
+		if (is_null(Game::find($request->game_id))) return response()->json(["error_message" => trans("error_messages.gameid_not_found")], 404);
 		$data = array_merge(["game_id" => $request->game_id], $request->all());
 		$player = Player::create($data);
 		return response()->json([ "player_id" => $player->id ], 200);
 	}
 
 	public function showGame(ShowGameApiRequest $request) {
-		if (Game::find($request->game_id) == null) return response()->json(["error_message" => trans("error_messages.gameid_not_found")], 404);
+		if (is_null(Game::find($request->game_id))) return response()->json(["error_message" => trans("error_messages.gameid_not_found")], 404);
 		$retPlayers = $this->getGamePlayers($request->game_id, $request->player_id);
 		return response()->json(["players" => $retPlayers], 200);
 	}
@@ -47,7 +49,16 @@ class ApiController extends Controller {
 		$game = Game::find($request->game_id);
 		$player = Player::find($request->player_id);
 		if ($player->game_id != $game->id) return response()->json(["error_message" => trans("error_messages.wrong_id_combination")], 400);
-		$player->update($request);
+		$player->update($request->all(["character", "description", "link"]));
+		$player->save();
+	}
+
+	public function leaveGame(LeaveGameRequest $request) {
+		if (Game::find($request->game_id) == null) return response()->json(["error_message" => trans("error_messages.gameid_not_found")], 404);
+		$player = Player::find($request->player_id);
+		$player->delete();
+		if (Player::where("game_id", $request->game_id)->count() == 0) Game::find($request->game_id)->delete(); // Delete game, if nobody is in it anymore
+		return response()->json([], 200);
 	}
 
 }

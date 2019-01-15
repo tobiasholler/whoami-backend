@@ -22,46 +22,8 @@ class CreateGameTest extends TestCase {
 		$response->assertJsonStructure([
 			"game_id"
 		]);
-	}
-
-	public function testJoinGameAlone() {
-		Game::create([
-			"id" => "abc"
-		]);
-		$response = $this->json("POST", "/api/join/abc", [
-			"name" => "aName", "character" => "aCharacter", "description" => "aDescription", "link" => "aLink"
-		]);
-		$response->assertStatus(200);
-		$response->assertExactJson([
-			"players" => []
-		]);
-	}
-
-	public function testJoinGameWithPersonAlreadyInIt() {
-		Game::create([
-			"id" => "abc"
-		]);
-		Player::create([
-			"game_id" => "abc",
-			"name" => "aName",
-			"character" => "aCharacter",
-			"description" => "aDescription",
-			"link" => "aLink"
-		]);
-		$response = $this->json("POST", "/api/join/abc", [
-			"name" => "bName", "character" => "bCharacter", "description" => "bDescription", "link" => "bLink"
-		]);
-		$response->assertStatus(200);
-		$response->assertExactJson([
-			"players" => [
-				[
-					"name" => "aName",
-					"character" => "aCharacter",
-					"description" => "aDescription",
-					"link" => "aLink"
-				]
-			]
-		]);
+		$jsonResponse = json_decode($response->getContent());
+		$this->assertNotEquals(null, Game::find($jsonResponse->game_id));
 	}
 
 }

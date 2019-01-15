@@ -3,8 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\VaidGameIdRule;
-use App\Rules\VaidPlayerIdRule;
+use App\Rules\ValidGameIdRule;
+use App\Rules\ValidPlayerIdRule;
 
 class ShowGameApiRequest extends FormRequest {
 	/**

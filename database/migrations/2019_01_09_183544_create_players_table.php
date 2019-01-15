@@ -16,8 +16,8 @@ class CreatePlayersTable extends Migration {
 			$table->string("game_id");
 			$table->string("name");
 			$table->string("character");
-			$table->string("description");
-			$table->string("link");
+			$table->string("description")->nullable();
+			$table->string("link")->nullable();
 			$table->timestamps();
 		});
 	}

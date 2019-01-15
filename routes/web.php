@@ -11,8 +11,10 @@
 |
 */
 
-Route::post("/api/newgame", "ApiController@newGame");
-Route::post("/api/joingame/{game_id}", "ApiController@joinGame");
-Route::get("/api/showgame/{game_id}", "ApiController@showGame");
-Route::update("/api/updatecharacter", "ApiController@updateCharacter");
-Route::delete("/api/leavegame", "ApiController@leaveGame");
+Route::prefix("api")->group(function () {
+	Route::post("newgame", "ApiController@newGame");
+	Route::post("joingame/{game_id}", "ApiController@joinGame");
+	Route::get("showgame/{game_id}", "ApiController@showGame");
+	Route::put("updatecharacter", "ApiController@updateCharacter");
+	Route::delete("leavegame/{game_id}", "ApiController@leaveGame");
+});

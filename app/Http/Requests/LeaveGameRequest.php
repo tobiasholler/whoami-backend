@@ -3,10 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\ValidGameIdRule;
 use App\Rules\ValidPlayerIdRule;
 
-class UpdateCharacterApiRequest extends FormRequest {
+class LeaveGameRequest extends FormRequest {
 	/**
 	 * Determine if the user is authorized to make this request.
 	 *
@@ -23,11 +22,7 @@ class UpdateCharacterApiRequest extends FormRequest {
 	 */
 	public function rules() {
 		return [
-			"game_id" => new ValidGameIdRule(),
-			"player_id" => new ValidPlayerIdRule(),
-			"character" => "min:1|max:64",
-			"description" => "nullable|max:255",
-			"link" => "nullable|max:255",
+			"player_id" => new ValidPlayerIdRule()
 		];
 	}
 }
