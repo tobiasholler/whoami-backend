@@ -1,6 +1,6 @@
 # Who Am I? Backend
 
-**Version: 0.1-INDEV**
+**Version: 0.1.1-INDEV**
 
 This is the backend to the [Who Am I? App](/tobiasholler/whoami-app)
 
@@ -19,7 +19,7 @@ php artisan migrate
 ```
 
 ## API-Docs
-**This API-Docs is not right yet. Please check the PHP software tests for examples.**
+**This API-Docs is not right yet. Please check the PHP unit tests for examples.**
 
 ### New Game
 
@@ -92,3 +92,6 @@ Returns the server version.
   "version": "1.0"   // string
 }
 ```
+
+# Changelog
+- 2019-03-09: 0.1.1-INDEV: Hotfix for MySQL Databases
